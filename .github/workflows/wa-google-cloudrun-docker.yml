@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: wagcp_deploy
     env:
-      IMAGE_NAME: gcr.io/${{ secrets.victoralmeidasantos }}/webacademy:latest
+      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/webacademy:latest
     steps:
       # Git checkout
       - name: Checkout
@@ -53,7 +53,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0
         with:
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-          project_id: ${{ secrets.victoralmeidasantos }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
 
       # gcloud configure docker
       - name: Configure Docker
@@ -61,12 +61,12 @@ jobs:
 
       # build image
       - name: Build Docker image
-        run: docker build -t $IMAGE_NAME .
+        run: docker build -t $victoralmeidasantos .
 
       # push image to registry
       - name: Push Docker image
-        run: docker push $IMAGE_NAME
+        run: docker push $victoralmeidasantos
 
       # deploy image
       - name: Deploy Docker image
-        run: gcloud run deploy wacicd --image $IMAGE_NAME --region us-west1 --memory 128Mi --min-instances 0 --max-instances 1 --platform managed --port 8080 --allow-unauthenticated
+        run: gcloud run deploy wacicd --image $victoralmeidasantos --region us-west1 --memory 128Mi --min-instances 0 --max-instances 1 --platform managed --port 8080 --allow-unauthenticated
