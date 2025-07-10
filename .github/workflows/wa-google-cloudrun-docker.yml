@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: wagcp_deploy
     env:
-      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/webacademy:latest
+      IMAGE_NAME: gcr.io/${{ secrets.victoralmeidasantos }}/webacademy:latest
     steps:
       # Git checkout
       - name: Checkout
@@ -53,7 +53,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0
         with:
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          project_id: ${{ secrets.victoralmeidasantos }}
 
       # gcloud configure docker
       - name: Configure Docker
